@@ -3,7 +3,7 @@ import { useAuthContext } from "./useAuthContext";
 
 export const useSignup = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null);
 
   const { dispatch } = useAuthContext();
 
@@ -11,6 +11,7 @@ export const useSignup = () => {
     setIsLoading(true);
     setError(null);
 
+    // response
     const res = await fetch("http://localhost:4000/api/user/register", {
       method: "POST",
       headers: {
@@ -20,17 +21,21 @@ export const useSignup = () => {
     });
 
     const data = await res.json();
+    console.log(data);
 
     if (!res.ok) {
       setIsLoading(false);
-      setError(data.error);
+      setError(data);
     }
 
     if (res.ok) {
       setIsLoading(false);
 
-      // update authContext
+      // update auth context
       dispatch({ type: "LOGIN", payload: data });
+
+      // // update local storage
+      // localStorage.setItem("user", JSON.stringify(data));
     }
   };
 

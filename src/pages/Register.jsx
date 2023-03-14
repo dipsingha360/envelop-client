@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "../components/Button";
 import FormControl from "../components/FormControl";
 import SectionTitle from "../components/SectionTitle";
+import { useSignup } from "../hooks/useSignup";
+
 const Register = () => {
   // states
   const [formFields, setFormFields] = useState({
@@ -10,37 +12,25 @@ const Register = () => {
     password: "",
   });
 
-  const handleRegister = (e) => {
+  const { signup, isLoading, error } = useSignup();
+
+  const handleRegister = async (e) => {
     e.preventDefault();
-    console.log(formFields);
+    await signup(formFields.name, formFields.email, formFields.password);
+    console.log(formFields.name, formFields.email, formFields.password);
 
     // clear
-    setFormFields({
-      name: "",
-      email: "",
-      password: "",
-    });
+    // setFormFields({
+    //   name: "",
+    //   email: "",
+    //   password: "",
+    // });
   };
 
   return (
     <div className="register flex flex-col justify-center items-center mt-20">
       <form onSubmit={handleRegister} className="flex flex-col gap-5">
         <SectionTitle title={"Register account"} />
-        {/* <div className="form-control flex flex-col gap-2">
-          <label htmlFor="name" className=" cursor-pointer">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Your name"
-            value={formFields.name}
-            onChange={(e) =>
-              setFormFields({ ...formFields, name: e.target.value })
-            }
-            className="border px-5 py-3 rounded-lg outline-none focus:border-violet-500 w-[25rem]"
-          />
-        </div> */}
 
         <FormControl
           label="name"
@@ -68,7 +58,15 @@ const Register = () => {
           formFields={formFields}
           setFormFields={setFormFields}
         />
-        <Button submit="submit" innerLabel="Register" />
+        <Button
+          submit="submit"
+          innerLabel={isLoading ? "Registering..." : "Register"}
+        />
+        {error && (
+          <p className="bg-rose-50 text-rose-500 rounded-lg border p-5  border-rose-200">
+            {error}
+          </p>
+        )}
       </form>
     </div>
   );
