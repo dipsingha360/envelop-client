@@ -34,8 +34,8 @@ export const useSignup = () => {
       // update auth context
       dispatch({ type: "LOGIN", payload: data });
 
-      // // update local storage
-      // localStorage.setItem("user", JSON.stringify(data));
+      // set/update local storage
+      localStorage.setItem("user", JSON.stringify(data));
     }
   };
 
