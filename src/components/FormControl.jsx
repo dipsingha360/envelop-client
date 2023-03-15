@@ -21,7 +21,7 @@ const FormControl = ({
         onChange={(e) =>
           setFormFields({ ...formFields, [label]: e.target.value })
         }
-        className="border px-5 py-3 rounded-lg outline-none focus:border-violet-500 w-[25rem]"
+        className="border px-5 py-3 rounded-lg outline-none focus:border-violet-500 w-full"
       />
     </div>
   );

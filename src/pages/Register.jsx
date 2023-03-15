@@ -20,17 +20,19 @@ const Register = () => {
     await signup(formFields.name, formFields.email, formFields.password);
     // console.log(formFields.name, formFields.email, formFields.password);
 
-    // clear
-    // setFormFields({
-    //   name: "",
-    //   email: "",
-    //   password: "",
-    // });
+    if (!error) {
+      // clear
+      setFormFields({
+        name: "",
+        email: "",
+        password: "",
+      });
+    }
   };
 
   return (
-    <div className="register flex flex-col justify-center items-center mt-20">
-      <form onSubmit={handleRegister} className="flex flex-col gap-5">
+    <div className="register flex flex-col justify-center items-center mt-20 ">
+      <form onSubmit={handleRegister} className="flex flex-col gap-5 w-[25rem]">
         <SectionTitle title={"Register account"} />
 
         <FormControl

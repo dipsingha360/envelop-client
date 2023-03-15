@@ -20,16 +20,18 @@ const Login = () => {
 
     await login(formFields.email, formFields.password);
 
-    // clear
-    setFormFields({
-      email: "",
-      password: "",
-    });
+    if (!error) {
+      // clear
+      setFormFields({
+        email: "",
+        password: "",
+      });
+    }
   };
 
   return (
     <div className="login flex flex-col justify-center items-center mt-20">
-      <form onSubmit={handleLogin} className="flex flex-col gap-5">
+      <form onSubmit={handleLogin} className="flex flex-col gap-5 w-[25rem]">
         <SectionTitle title={"Login"} />
 
         <FormControl
