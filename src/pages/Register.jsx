@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../components/Button";
+import ErrorMessage from "../components/ErrorMessage";
 import FormControl from "../components/FormControl";
 import SectionTitle from "../components/SectionTitle";
 import { useSignup } from "../hooks/useSignup";
@@ -17,7 +18,7 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     await signup(formFields.name, formFields.email, formFields.password);
-    console.log(formFields.name, formFields.email, formFields.password);
+    // console.log(formFields.name, formFields.email, formFields.password);
 
     // clear
     // setFormFields({
@@ -62,11 +63,7 @@ const Register = () => {
           submit="submit"
           innerLabel={isLoading ? "Registering..." : "Register"}
         />
-        {error && (
-          <p className="bg-rose-50 text-rose-500 rounded-lg border p-5  border-rose-200">
-            {error}
-          </p>
-        )}
+        {error && <ErrorMessage error={error} />}
       </form>
     </div>
   );
