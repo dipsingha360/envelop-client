@@ -72,4 +72,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default React.memo(Register);

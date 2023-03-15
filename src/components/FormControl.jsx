@@ -27,4 +27,4 @@ const FormControl = ({
   );
 };
 
-export default FormControl;
+export default React.memo(FormControl);
